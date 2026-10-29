@@ -1,0 +1,11 @@
+[responsables]
+"falta acuse de entrega" = "Operación"
+"falta orden de compra" = "Ventas"
+"pedido no coincide" = "Ventas"
+"monto distinto" = "Ventas"
+"falta aceptación" = "Cuentas por cobrar"
+"vínculo ambiguo" = "Cuentas por cobrar"
+"pago por conciliar" = "Tesorería"
+"falta liquidez reportada" = "Finanzas"
+"sin motivo documentado" = "Cuentas por cobrar"
+

@@ -1,0 +1,159 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+  --color-ok: var(--ok);
+  --color-mal: var(--mal);
+  --color-aviso: var(--aviso);
+  --color-marino: var(--marino);
+  --color-naranja: var(--naranja);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* CubiCarga: industrial-logístico. Marino base, naranja seguridad para acciones. */
+  --marino: #0f2a44;
+  --naranja: #f97316;
+  --concreto: #e5e7eb;
+  --ok: #16a34a;
+  --mal: #dc2626;
+  --aviso: #ca8a04;
+
+  --background: #f6f7f9;
+  --foreground: #0f2a44;
+  --card: #ffffff;
+  --card-foreground: #0f2a44;
+  --popover: #ffffff;
+  --popover-foreground: #0f2a44;
+  --primary: #f97316;
+  --primary-foreground: #0f2a44;
+  --secondary: #e5e7eb;
+  --secondary-foreground: #0f2a44;
+  --muted: #eef0f3;
+  --muted-foreground: #4b5563;
+  --accent: #e5e7eb;
+  --accent-foreground: #0f2a44;
+  --destructive: #dc2626;
+  --border: #d7dbe1;
+  --input: #c9ced6;
+  --ring: #f97316;
+  --chart-1: #0072b2;
+  --chart-2: #e69f00;
+  --chart-3: #009e73;
+  --chart-4: #cc79a7;
+  --chart-5: #56b4e9;
+  --radius: 0.5rem;
+  --sidebar: #0f2a44;
+  --sidebar-foreground: #e5e7eb;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #0f2a44;
+  --sidebar-accent: #17395a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1f3a57;
+  --sidebar-ring: #f97316;
+  --visor-fondo: #eef1f5;
+  --visor-linea: #0f2a44;
+}
+
+.dark {
+  --background: #0a1b2c;
+  --foreground: #e5e7eb;
+  --card: #0f2a44;
+  --card-foreground: #e5e7eb;
+  --popover: #0f2a44;
+  --popover-foreground: #e5e7eb;
+  --primary: #f97316;
+  --primary-foreground: #0f2a44;
+  --secondary: #17395a;
+  --secondary-foreground: #e5e7eb;
+  --muted: #12324f;
+  --muted-foreground: #a7b4c4;
+  --accent: #17395a;
+  --accent-foreground: #ffffff;
+  --destructive: #f87171;
+  --border: #1f3a57;
+  --input: #2a4a6b;
+  --ring: #f97316;
+  --ok: #4ade80;
+  --mal: #f87171;
+  --aviso: #facc15;
+  --sidebar: #08182a;
+  --sidebar-foreground: #e5e7eb;
+  --sidebar-accent: #17395a;
+  --sidebar-border: #1f3a57;
+  --visor-fondo: #0c2136;
+  --visor-linea: #a7b4c4;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+@layer utilities {
+  .num {
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+select {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+input[type="checkbox"] {
+  accent-color: var(--primary);
+}

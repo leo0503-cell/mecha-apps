@@ -1,0 +1,53 @@
+{
+  "name": "Mecha",
+  "short_name": "Mecha",
+  "description": "Radar diario de tu mercado, tus conversaciones de WhatsApp, tu contenido de la semana y tu página web.",
+  "lang": "es-MX",
+  "scope": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F1EFE9",
+  "theme_color": "#16161A",
+  "icons": [
+    {
+      "src": "assets/img/icono-512-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icono-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/icono-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/img/icono-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mis pendientes",
+      "url": "./#/hoy"
+    },
+    {
+      "name": "Radar de hoy",
+      "url": "./#/radar"
+    },
+    {
+      "name": "Contenido de la semana",
+      "url": "./#/contenido"
+    }
+  ],
+  "id": "./"
+}

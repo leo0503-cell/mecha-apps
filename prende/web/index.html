@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="theme-color"
+      content="#F1EFE9"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#16161A"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="description"
+      content="Usa la IA en tu negocio desde hoy. Recetas con tu negocio adentro, una ruta de 30 días y la Mesa de trabajo de Mecha. Gratis, sin cuentas."
+    />
+    <title>Prende — la guía de IA de Mecha</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link
+      rel="preload"
+      href="assets/fuentes/Archivo-VF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Ir al contenido</a>
+    <div id="shell">
+      <header class="topbar">
+        <a href="#/inicio" class="brand" aria-label="Prende de Mecha, inicio"
+          ><span class="brand-spark" aria-hidden="true">✳</span> prende<span
+            class="by-mecha"
+            >de MECHA</span
+          ></a
+        >
+        <div class="top-actions">
+          <span class="local-label">Tu negocio. Tu ritmo.</span
+          ><button
+            id="menu-toggle"
+            class="icon-button"
+            aria-label="Más opciones"
+            aria-expanded="false"
+            aria-controls="more-menu"
+          >
+            ⋯
+          </button>
+        </div>
+        <nav id="more-menu" class="more-menu" aria-label="Más opciones" hidden>
+          <a href="#/paquetes">Paquetes de Mecha</a
+          ><a href="#/reglas">Reglas de la casa</a
+          ><a href="#/equipo">Tu equipo</a><a href="#/ajustes">Ajustes</a>
+        </nav>
+      </header>
+      <nav id="navigation" class="navigation" aria-label="Principal"></nav>
+      <main id="contenido" tabindex="-1">
+        <div class="loading-page">
+          <span class="ember" aria-hidden="true"></span>
+          <p>Estamos prendiendo la mecha…</p>
+        </div>
+      </main>
+      <footer class="site-footer">
+        Hecho por <strong>Mecha.</strong> Enciende lo que ya tienes.
+      </footer>
+    </div>
+    <div id="toast" role="status" aria-live="polite" class="toast"></div>
+    <dialog id="delete-dialog">
+      <h2>Borrar mis datos</h2>
+      <p>
+        Se borrarán tu perfil, Radiografía, Ruta, favoritas e historial de este
+        navegador.
+      </p>
+      <div class="actions">
+        <button id="cancel-delete" class="button secondary">
+          Conservar mis datos</button
+        ><button id="confirm-delete" class="button primary">Sí, borrar</button>
+      </div>
+    </dialog>
+    <noscript
+      >Prende necesita JavaScript. Actívalo en tu navegador para usar las
+      recetas y la Ruta.</noscript
+    >
+  </body>
+</html>

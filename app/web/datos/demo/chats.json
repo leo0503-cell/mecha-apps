@@ -1,0 +1,32 @@
+{
+  "conectado": false,
+  "periodo": "Últimos 7 días",
+  "actualizado": null,
+  "metricas": {
+    "conversaciones": null,
+    "contestadas_asistente": null,
+    "primera_respuesta": null,
+    "cotizaciones": null,
+    "citas": null,
+    "te_tocaron": null
+  },
+  "te_toca": [],
+  "recientes": [],
+  "ejemplo": [
+    {
+      "nombre": "<Cliente ejemplo>",
+      "mensaje": "Pide precio de un servicio que no está en tu lista",
+      "estado": "te toca"
+    },
+    {
+      "nombre": "<Cliente ejemplo 2>",
+      "mensaje": "Preguntó el horario del sábado; el asistente contestó",
+      "estado": "contestada por el asistente"
+    },
+    {
+      "nombre": "<Cliente ejemplo 3>",
+      "mensaje": "Quedó agendado y el recordatorio sale un día antes",
+      "estado": "cita agendada"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Reservas</title>
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="motor/estilos.css?v=20261023" />
+    <link rel="stylesheet" href="marca.css?v=20261023" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="marca" id="marca"></div>
+      <div class="sucursal" id="sucursal" hidden></div>
+      <div class="noches" id="noches"></div>
+      <label class="reloj"><span>Hora</span><select id="hora" aria-label="Hora de la noche (simulada)"></select></label>
+      <button class="rol-btn" id="rol" type="button" aria-label="Cambiar de rol"></button>
+    </header>
+    <nav class="tabs" id="tabs" aria-label="Vistas"></nav>
+    <main id="vista"></main>
+    <footer class="pie" id="pie">
+      Demo hecho por <b>Mecha</b> · plano, menú, RPs y clientes de ejemplo
+    </footer>
+    <dialog id="dlg"></dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <script src="datos.js?v=20261023"></script>
+    <script src="motor/nucleo.js?v=20261023"></script>
+    <script src="motor/app.js?v=20261023"></script>
+  </body>
+</html>

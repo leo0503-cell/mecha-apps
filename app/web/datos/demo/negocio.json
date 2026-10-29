@@ -1,0 +1,33 @@
+{
+  "id": "demo",
+  "nombre": "Mecha",
+  "giro": "Agencia de IA y automatización para PyMEs",
+  "ciudad": "Aguascalientes",
+  "paquete": "Mecha + contenido",
+  "contacto_mecha": {
+    "whatsapp": "524491557494"
+  },
+  "radar": {
+    "hora": "6:30 a. m.",
+    "competidores": [
+      {
+        "nombre": "Business AI de Meta",
+        "web": "https://business.whatsapp.com/"
+      },
+      {
+        "nombre": "Lovbot",
+        "web": "https://www.lovbot.ai/"
+      },
+      {
+        "nombre": "Leadsales",
+        "web": "https://leadsales.io/"
+      }
+    ],
+    "temas": [
+      "precios y reglas de WhatsApp Business",
+      "IA en PyMEs mexicanas",
+      "fechas comerciales en México",
+      "negocios en Aguascalientes"
+    ]
+  }
+}

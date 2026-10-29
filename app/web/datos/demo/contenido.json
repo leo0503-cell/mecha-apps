@@ -1,0 +1,69 @@
+{
+  "semana": {
+    "inicio": "2026-09-14",
+    "fin": "2026-09-20"
+  },
+  "meta": {
+    "posts": 2,
+    "reels": 1
+  },
+  "piezas": [
+    {
+      "id": "2026-09-14-reel-folio",
+      "tipo": "reel",
+      "titulo": "Un formato de papel que el solicitante consulta solo",
+      "fecha": "2026-09-14",
+      "redes": ["Instagram", "Facebook"],
+      "estado": "para aprobar",
+      "video": "contenido/reel-folio.mp4",
+      "portada": "contenido/reel-portada.webp",
+      "duracion": "18 s",
+      "caption": "Un formato de papel convertido en algo que el solicitante puede consultar solo.\n\nQR → folio automático → correo de acuse → página de estatus.\nTú nada más mueves una columna.\n\nSe arma en una tarde y no tiene costo mensual.\n\n¿Cuál es el formato de papel que te toca tirar? Dímelo en comentarios.",
+      "hashtags": "#aguascalientes #pymesmexico #automatizacion #googleworkspace #negociolocal"
+    },
+    {
+      "id": "2026-09-16-post-4-cosas",
+      "tipo": "post",
+      "titulo": "4 cosas que tu negocio ya puede dejar de hacer a mano",
+      "fecha": "2026-09-16",
+      "redes": ["Instagram", "Facebook"],
+      "estado": "para aprobar",
+      "slides": [
+        "contenido/post2-4-cosas/01.webp",
+        "contenido/post2-4-cosas/02.webp",
+        "contenido/post2-4-cosas/03.webp",
+        "contenido/post2-4-cosas/04.webp",
+        "contenido/post2-4-cosas/05.webp",
+        "contenido/post2-4-cosas/06.webp"
+      ],
+      "caption": "4 cosas que tu negocio ya puede dejar de hacer a mano.\n\nNinguna te obliga a cambiar de sistema ni a contratar software nuevo. Se montan\nencima de lo que ya usas: tu WhatsApp, tu Excel, tu correo.\n\n1. Contestar la misma pregunta 20 veces al día\n2. Armar cotizaciones una por una\n3. Rehacer el reporte de fin de mes\n4. Perseguir solicitudes en papel\n\nSon 4 porque son las 4 que tengo armadas y probadas. Ni una más.\n\nGuárdalo para cuando lo ocupes.",
+      "hashtags": "#pymesmexico #aguascalientes #automatizacion #whatsappbusiness #productividad #negociolocal"
+    },
+    {
+      "id": "2026-09-18-post-folio",
+      "tipo": "post",
+      "titulo": "Esta hoja de papel ya no existe",
+      "fecha": "2026-09-18",
+      "redes": ["Instagram", "Facebook"],
+      "estado": "para aprobar",
+      "slides": [
+        "contenido/post1-folio/01.webp",
+        "contenido/post1-folio/02.webp",
+        "contenido/post1-folio/03.webp",
+        "contenido/post1-folio/04.webp",
+        "contenido/post1-folio/05.webp",
+        "contenido/post1-folio/06.webp",
+        "contenido/post1-folio/07.webp"
+      ],
+      "caption": "Esta hoja de papel ya no existe.\n\nEl problema nunca fue el papel. Era que nadie sabía en qué iba su solicitud,\nasí que todo el día llegaban mensajes de \"¿ya salió lo mío?\".\n\nAhora: QR → folio automático → correo de acuse → página donde el solicitante\nconsulta su estatus solo. Sin cuenta de Google, sin llamarte.\n\nSe arma en una tarde y queda corriendo sin costo mensual.\n\n¿Qué formato de papel te está comiendo el día? Escríbeme por DM y te digo si\nse puede automatizar.",
+      "hashtags": "#aguascalientes #pymesmexico #automatizacion #googleworkspace #procesos #negociolocal"
+    }
+  ],
+  "siguiente": [
+    {
+      "titulo": "Tu negocio no necesita inteligencia artificial",
+      "tipo": "post",
+      "fecha": "2026-09-21"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Mi mesa</title>
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="motor/estilos.css?v=20261023" />
+    <link rel="stylesheet" href="marca.css?v=20261023" />
+  </head>
+  <body class="pagina-pago">
+    <div class="simulado">Demo de Mecha · pago simulado, no se cobra nada</div>
+    <main class="pago" id="pago"></main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="datos.js?v=20261023"></script>
+    <script src="motor/nucleo.js?v=20261023"></script>
+    <script>
+      "use strict";
+      // Lo que ve el cliente desde su WhatsApp: pagar el anticipo (pasarela simulada o efectivo
+      // con su RP), confirmar o cancelar cuando le llega el recordatorio, y su pase QR de entrada.
+      const codigoURL = new URLSearchParams(location.search).get("c");
+      const el = document.getElementById("pago");
+      let metodo = "Tarjeta";
+      S = cargar() || estadoInicial();
+      aplicarMarca("Mi mesa");
+      const actual = () => S.reservas.find((x) => x.codigo === codigoURL);
+
+      function tarjeta(r) {
+        const n = nocheDe(r.noche);
+        const m = r.mesa ? mesaDe(r.mesa, r.suc) : null;
+        const suc = sucDe(r.suc);
+        return `${logoMarca("pago-logo")}
+          <p class="serif">${esc(MARCA.lema)}</p>
+          <div class="pago-tarjeta">
+            <div class="pt-fila"><span>Reservación</span><b class="mono">${esc(r.codigo)}</b></div>
+            <div class="pt-fila"><span>A nombre de</span><b>${esc(r.cliente)}</b></div>
+            ${multiSucursal ? `<div class="pt-fila"><span>Sucursal</span><b>${esc(suc.nombre)}${suc.direccion ? `<small class="pt-dir">${esc(suc.direccion)}</small>` : ""}</b></div>` : ""}
+            <div class="pt-fila"><span>Noche</span><b>${esc(n ? n.larga : r.noche)}</b></div>
+            <div class="pt-fila"><span>Mesa</span><b>${m ? `${etiquetaMesa(r)} · ${zonaDe(m.zona).nombre}` : esc(r.mesaOriginal || "Lista de espera")}</b></div>
+            <div class="pt-fila"><span>Personas · llegada</span><b>${r.personas} · ${r.hora}</b></div>
+            <div class="pt-fila"><span>Tu RP</span><b>${esc(rpDe(r.rp).nombre)}</b></div>
+          </div>`;
+      }
+
+      function seccionPago(r) {
+        if (!r.anticipo) return "";
+        const resta = Math.max(0, r.anticipo - pagadoAnticipo(r));
+        if (!resta) {
+          const p = r.pagos.filter((x) => x.tipo === "Anticipo").at(-1);
+          return `<div class="seccion ok"><span class="eyebrow">Mesa apartada ✓</span><p>Anticipo de <b>${dinero(pagadoAnticipo(r))}</b>${p ? ` · ${esc(p.metodo)}` : ""}. Se descuenta de tu consumo.</p></div>`;
+        }
+        if (r.efectivoPendiente) {
+          return `<div class="seccion aviso-ef"><span class="eyebrow">Pago en efectivo</span>
+            <p>Entrega <b>${dinero(resta)}</b> a <b>${esc(rpDe(r.rp).nombre)}</b>, tu RP. Tu mesa queda apartada cuando lo registre.</p>
+            <button class="btn chico" data-c="otro-metodo">Mejor pago en línea</button></div>`;
+        }
+        return `<div class="seccion">
+          <div class="pago-monto"><small>Anticipo para apartar</small><b>${dinero(resta)}</b>
+            <span class="tenue">Se descuenta de tu consumo. Si no llegas, no se devuelve.</span></div>
+          <div class="metodos pago-metodos cuatro" role="radiogroup" aria-label="Forma de pago">
+            ${["Tarjeta", "OXXO", "SPEI", "Efectivo"].map((x) => `<label><input type="radio" name="metodo" value="${x}"${x === metodo ? " checked" : ""}><span>${x}</span></label>`).join("")}
+          </div>
+          <button class="btn primario grande" data-c="pagar">${metodo === "Efectivo" ? `Pagaré en efectivo con ${esc(rpDe(r.rp).nombre)}` : `Pagar ${dinero(resta)}`}</button>
+          <p class="tenue chico centro">${metodo === "Efectivo" ? "Le avisamos a tu RP para que pase por él." : "Aquí iría el cobro real de la pasarela. En el demo sólo se marca como pagado."}</p>
+        </div>`;
+      }
+
+      function seccionConfirmar(r) {
+        if (r.confirmacion === "si") return `<div class="seccion ok"><span class="eyebrow">Confirmaste ✓</span><p>Te esperamos a las ${esc(r.hora)}. Tolerancia de ${S.ajustes.tolerancia} min.</p><button class="btn chico peligro" data-c="cancelo">Ya no puedo ir</button></div>`;
+        return `<div class="seccion">
+          <span class="eyebrow">¿Sigues en pie?</span>
+          <div class="botones dos"><button class="btn primario" data-c="confirmo">Confirmo, ahí estaré</button><button class="btn peligro" data-c="cancelo">Ya no voy</button></div>
+          <p class="tenue chico">Si cancelas, la mesa se libera para alguien más${pagadoAnticipo(r) ? " y el anticipo no se devuelve" : ""}.</p>
+        </div>`;
+      }
+
+      function pintar(aviso) {
+        const r = actual();
+        if (!r) {
+          el.innerHTML = `${logoMarca("pago-logo")}<h1>Reservación no encontrada</h1>
+            <p class="tenue">En el demo la liga sólo funciona en el mismo navegador donde se hizo la reservación.</p>`;
+          return;
+        }
+        if (r.estado === "cancelada" || r.estado === "noshow") {
+          el.innerHTML = tarjeta(r) + `<h1>Esta reservación ya no está activa</h1><p class="tenue">Escríbele a ${esc(rpDe(r.rp).nombre)} para una nueva.</p>`;
+          return;
+        }
+        if (r.estado === "llego" || r.estado === "cerrada") {
+          // Ya en el antro el cliente ve su cuenta al momento, igual que el mesero.
+          const its = {};
+          comandasDe(r).flatMap((c) => c.items).forEach((i) => { (its[i.nombre] ??= { cant: 0, total: 0 }); its[i.nombre].cant += i.cant; its[i.nombre].total += i.cant * i.precio; });
+          el.innerHTML = tarjeta(r) + `<div class="pago-ok"><div class="check">${MARCA.emoji}</div><h1>${r.estado === "cerrada" ? "Gracias por venir" : "Ya estás dentro"}</h1></div>
+            ${cuenta(r) ? `<div class="seccion"><span class="eyebrow">Tu cuenta</span>
+              <ul class="ticket">${Object.entries(its).map(([n, x]) => `<li><span>${x.cant}× ${esc(n)}</span><b class="mono">${dinero(x.total)}</b></li>`).join("")}</ul>
+              <div class="ticket-total"><span>Consumo</span><b class="mono">${dinero(cuenta(r))}</b></div>
+              <div class="ticket-total"><span>Falta</span><b class="mono ${falta(r) ? "rojo" : "cian"}">${dinero(falta(r))}</b></div>
+            </div>` : `<p class="tenue centro">Disfruta la noche.</p>`}`;
+          return;
+        }
+        el.innerHTML = tarjeta(r) +
+          (aviso ? `<div class="seccion ok anima"><span class="eyebrow">${aviso}</span></div>` : "") +
+          (r.estado === "reservada" ? seccionPago(r) + seccionConfirmar(r) : `<div class="seccion"><p>Estás en lista de espera. Te avisamos por WhatsApp si se libera una mesa.</p></div>`) +
+          (r.estado === "reservada" ? `<div class="seccion pase">
+            <span class="eyebrow">Tu pase de entrada</span>
+            <div class="pase-qr">${qrSvg(r.codigo)}</div>
+            <b class="mono">${esc(r.codigo)}</b>
+            <p class="tenue chico">Muéstralo en la entrada. La hostess lo escanea y te lleva a tu mesa.</p>
+          </div>` : "");
+      }
+
+      el.addEventListener("change", (e) => { if (e.target.name === "metodo") { metodo = e.target.value; pintar(); } });
+      el.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-c]");
+        if (!b) return;
+        S = cargar() || S;
+        const r = actual();
+        if (b.dataset.c === "otro-metodo") { r.efectivoPendiente = false; metodo = "Tarjeta"; guardar(); return pintar(); }
+        if (b.dataset.c === "confirmo") { r.confirmacion = "si"; guardar(); return pintar("Listo, tu RP ya sabe que vienes"); }
+        if (b.dataset.c === "cancelo") {
+          if (!confirm("¿Seguro que ya no vas? La mesa se libera para alguien más.")) return;
+          r.canceloCliente = true;
+          liberar(r, "cancelada");
+          guardar();
+          return pintar();
+        }
+        if (b.dataset.c === "pagar") {
+          if (metodo === "Efectivo") { r.efectivoPendiente = true; guardar(); return pintar("Le avisamos a tu RP"); }
+          b.disabled = true;
+          b.textContent = "Procesando…";
+          setTimeout(() => {
+            S = cargar() || S;
+            const r2 = actual();
+            const resta = Math.max(0, r2.anticipo - pagadoAnticipo(r2));
+            if (resta) r2.pagos.push({ monto: resta, metodo: "Liga · " + metodo, tipo: "Anticipo", hora: S.hora });
+            r2.efectivoPendiente = false;
+            guardar();
+            pintar("Pago recibido · mesa apartada");
+          }, 1100);
+        }
+      });
+      // Si el personal registra algo (efectivo, check-in), la página del cliente se actualiza.
+      window.addEventListener("storage", (e) => { if (e.key === LLAVE && e.newValue) { recibirDatos(e.newValue); pintar(); } });
+      pintar();
+    </script>
+  </body>
+</html>

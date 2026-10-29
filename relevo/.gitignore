@@ -1,0 +1,13 @@
+.venv/
+.uv-cache/
+.uv-python/
+.tmp/
+.pruebas-tmp/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+demo/datos/
+salida/
+.env
+data/*.json
+

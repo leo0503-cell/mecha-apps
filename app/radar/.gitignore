@@ -1,0 +1,7 @@
+.env
+.venv/
+__pycache__/
+# Clientes reales no van al repo; solo el demo.
+clientes/*.toml
+!clientes/demo.toml
+.candado

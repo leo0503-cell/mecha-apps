@@ -1,0 +1,22 @@
+{
+  "name": "mecha-buscador",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/server.js",
+    "start": "bun src/server.js",
+    "admin": "bun src/admin.js",
+    "build": "bun build public/app.js --outdir public/build --minify",
+    "test": "bun test",
+    "format": "prettier --write src public/*.html public/*.js public/*.css tests package.json",
+    "backup": "bun src/backup.js"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.7",
+    "marked": "^16.3.0",
+    "sanitize-html": "^2.18.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

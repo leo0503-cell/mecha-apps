@@ -1,0 +1,4 @@
+Archivo se distribuye bajo la SIL Open Font License 1.1.
+Copyright (c) Omnibus-Type. https://github.com/Omnibus-Type/Archivo
+Se incluye aqui para que la build sea reproducible sin red.
+El texto completo de la licencia: https://openfontlicense.org

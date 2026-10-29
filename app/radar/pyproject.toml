@@ -1,0 +1,11 @@
+[project]
+name = "mecha-radar"
+version = "0.1.0"
+description = "Genera la edición diaria del Radar de cada cliente de Mecha"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=1.11.0",
+]
+
+[tool.ruff]
+line-length = 110

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mecha — IA que trabaja</title>
+    <meta
+      name="description"
+      content="Mecha: marketing con IA, automatización y apps a medida para PyMEs mexicanas."
+    />
+    <link rel="icon" href="assets/img/favicon-32.png" />
+    <link
+      rel="preload"
+      href="assets/fuentes/Archivo-VF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <header class="barra">
+      <a href="#inicio" class="barra__logo" aria-label="Mecha, inicio">
+        <img
+          src="assets/img/logo-horizontal-oscuro.webp"
+          alt="Mecha"
+          width="900"
+          height="450"
+        />
+      </a>
+      <a class="boton boton--chico" href="#contacto">Hablemos</a>
+    </header>
+
+    <main>
+      <!-- Portada -->
+      <section class="portada" id="inicio">
+        <div class="portada__brillo" aria-hidden="true"></div>
+        <div class="portada__texto">
+          <p class="etiqueta">Agencia de IA · PyMEs mexicanas</p>
+          <h1 class="portada__titulo">
+            <span class="linea"><span>Tu negocio,</span></span>
+            <span class="linea"><span>con la mecha</span></span>
+            <span class="linea"><span class="acento">encendida.</span></span>
+          </h1>
+          <p class="portada__bajada">
+            Marketing con IA, automatización y apps a medida. Para el negocio
+            que tarda en contestar WhatsApp, cotiza a mano o agenda por mensaje.
+          </p>
+        </div>
+        <img
+          class="portada__robot"
+          src="assets/img/robot-busto-960.webp"
+          alt="Robot de Mecha con visor rojo"
+          width="960"
+          height="913"
+        />
+        <a
+          class="portada__scroll"
+          href="#escena-1"
+          aria-label="Bajar a los servicios"
+        >
+          <span>Desliza</span>
+          <i aria-hidden="true"></i>
+        </a>
+      </section>
+
+      <!-- Escenas con parallax -->
+      <section class="escena" id="escena-1">
+        <figure class="escena__marco">
+          <div class="escena__capa" data-parallax>
+            <img
+              class="escena__img"
+              data-revelar
+              src="assets/img/escena-01.jpg"
+              alt="Robot de Mecha en un estudio rodeado de pantallas con publicaciones"
+              loading="lazy"
+            />
+          </div>
+        </figure>
+        <div class="escena__texto">
+          <span class="escena__num">01</span>
+          <h2>Marketing con IA</h2>
+          <p>
+            Contenido, campañas y reportes que salen cada semana sin que tú los
+            persigas.
+          </p>
+        </div>
+      </section>
+
+      <section class="escena escena--der" id="escena-2">
+        <figure class="escena__marco">
+          <div class="escena__capa" data-parallax>
+            <img
+              class="escena__img"
+              data-revelar
+              src="assets/img/escena-02.jpg"
+              alt="Robot de Mecha frente a un flujo de nodos conectados"
+              loading="lazy"
+            />
+          </div>
+        </figure>
+        <div class="escena__texto">
+          <span class="escena__num">02</span>
+          <h2>Automatización</h2>
+          <p>
+            WhatsApp que contesta, cotizaciones que se arman solas y agenda que
+            no se cruza.
+          </p>
+        </div>
+      </section>
+
+      <section class="escena" id="escena-3">
+        <figure class="escena__marco">
+          <div class="escena__capa" data-parallax>
+            <img
+              class="escena__img"
+              data-revelar
+              src="assets/img/escena-03.jpg"
+              alt="Robot de Mecha con un celular que proyecta un tablero"
+              loading="lazy"
+            />
+          </div>
+        </figure>
+        <div class="escena__texto">
+          <span class="escena__num">03</span>
+          <h2>Apps y tableros a medida</h2>
+          <p>
+            Tus números a la vista y herramientas hechas para cómo trabaja tu
+            equipo.
+          </p>
+        </div>
+      </section>
+
+      <!-- Cierre -->
+      <section class="cierre" id="contacto">
+        <h2 class="cierre__titulo">¿Le prendemos?</h2>
+        <p>
+          Cuéntanos qué se te atora y te decimos qué parte se puede automatizar.
+        </p>
+        <a
+          class="boton"
+          href="https://wa.me/524491557494?text=Hola%20Mecha%2C%20quiero%20saber%20m%C3%A1s"
+          target="_blank"
+          rel="noopener"
+          >Escríbenos por WhatsApp</a
+        >
+      </section>
+    </main>
+
+    <footer class="pie">
+      <span>© 2026 Mecha</span>
+      <span>Aguascalientes, México</span>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/parallax.js"></script>
+  </body>
+</html>

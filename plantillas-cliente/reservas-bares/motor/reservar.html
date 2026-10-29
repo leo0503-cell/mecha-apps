@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Reserva tu mesa</title>
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="motor/estilos.css?v=20261023" />
+    <link rel="stylesheet" href="marca.css?v=20261023" />
+  </head>
+  <body class="publica">
+    <div class="simulado">Demo de Mecha · reservación y pago simulados</div>
+    <header class="pub-cab">
+      <div id="cab-marca"></div>
+      <div id="invita"></div>
+    </header>
+    <main class="pub" id="pub"></main>
+    <script src="datos.js?v=20261023"></script>
+    <script src="motor/nucleo.js?v=20261023"></script>
+    <script>
+      "use strict";
+      // Página pública: el cliente escoge su mesa en el mapa. Si llega por la liga de un RP
+      // (?rp=dani) la reservación queda a nombre de ese RP; ?noche= abre una noche (preventa);
+      // ?suc= abre una sucursal (si el bar tiene varias, el cliente la escoge arriba).
+      const params = new URLSearchParams(location.search);
+      const rpLiga = RPS.find((r) => r.id === params.get("rp") && !r.casa);
+      S = cargar() || estadoInicial();
+      guardar();
+      aplicarMarca("Reserva tu mesa");
+      document.getElementById("cab-marca").innerHTML = logoMarca("pub-logo") + `<p class="serif">${esc(MARCA.lema)}</p>`;
+      const V = {
+        noche: nocheDe(params.get("noche"))?.fecha || NOCHES[0].fecha,
+        suc: SUCURSALES.find((x) => x.id === params.get("suc"))?.id || SUCURSALES[0].id,
+        sel: null,
+      };
+
+      document.getElementById("invita").innerHTML = rpLiga
+        ? `<span class="chip c-cian">Te invita ${esc(rpLiga.nombre)} ${MARCA.emoji}</span>` : "";
+
+      function panelMesa() {
+        if (!V.sel) {
+          return `<div class="panel vacio"><p>Toca una mesa disponible del mapa.<br><span class="tenue">El número de cada mesa es cuántas personas caben.</span></p></div>`;
+        }
+        const m = mesaDe(V.sel, V.suc);
+        const ant = calcAnticipo([m.id], "", V.noche, V.suc);
+        return `<form class="panel" id="form-pub" autocomplete="on">
+          <div class="panel-cab"><h2>Mesa ${m.id} <span class="tenue">· ${multiSucursal ? esc(sucDe(V.suc).nombre) : zonaDe(m.zona).nombre}</span></h2><button class="x" type="button" data-pub="cerrar" aria-label="Cerrar">×</button></div>
+          <div class="cuentas">
+            <div><small>Hasta</small><b>${m.cap} pers</b></div>
+            <div><small>Zona</small><b class="cian">${zonaDe(m.zona).nombre}</b></div>
+            <div><small>Anticipo</small><b>${ant ? dinero(ant) : "No se pide"}</b></div>
+          </div>
+          <div class="campos" style="margin-top:14px">
+            <label class="campo ancho">Nombre<input name="cliente" required autocomplete="name" placeholder="Tu nombre"></label>
+            <label class="campo ancho">WhatsApp<input name="tel" required inputmode="tel" autocomplete="tel" placeholder="449 123 4567"></label>
+            <label class="campo">Personas<input name="personas" type="number" min="1" max="${m.cap}" value="${Math.min(4, m.cap)}" required></label>
+            <label class="campo">Llegas<select name="hora">${opciones(HORAS, MARCA.horaReserva)}</select></label>
+          </div>
+          <p class="tenue chico">${ant ? "El anticipo se descuenta de tu consumo. Si no llegas, no se devuelve." : "Pagas en la mesa lo que consumas. Te llega tu pase por WhatsApp."}</p>
+          <button class="btn primario grande" type="submit">Apartar mesa ${m.id}</button>
+        </form>`;
+      }
+
+      function pintar() {
+        const n = nocheDe(V.noche);
+        const oc = ocupadas(V.noche, undefined, V.suc);
+        const libres = mesasSuc(V.suc).filter((m) => !oc.has(m.id)).length;
+        const sucursales = multiSucursal ? `<div class="pub-sucursales">${SUCURSALES.map((x) => `<button class="suc-op${x.id === V.suc ? " activa" : ""}" data-pub="suc" data-suc="${x.id}"><b>${esc(x.nombre)}</b>${x.direccion ? `<small>${esc(x.direccion)}</small>` : ""}</button>`).join("")}</div>` : "";
+        document.getElementById("pub").innerHTML = `
+          ${sucursales}
+          <div class="noches pub-noches">${NOCHES.map((x) => `<button class="noche${x.fecha === V.noche ? " activa" : ""}" data-pub="noche" data-f="${x.fecha}">${x.corta}${x.evento ? " " + (x.icono || "★") : ""}</button>`).join("")}</div>
+          ${n.evento ? `<div class="evento"><span class="eyebrow">${esc(n.corta)}</span><h1>${esc(n.evento)}</h1><p class="tenue">${esc(n.desc || "")} Escoge tu mesa antes de que se acaben.</p></div>`
+            : `<div class="evento normal"><h1>Reserva tu mesa</h1><p class="tenue">${esc(n.larga)} · ${esc(MARCA.abre.toLowerCase())}</p></div>`}
+          <div class="pub-grid">
+            <div class="panel">
+              <div class="panel-cab"><h3>Escoge tu mesa${multiSucursal ? " en " + esc(sucDe(V.suc).nombre) : ""}</h3><span class="mono tenue">${libres} disponibles</span></div>
+              <div class="leyenda"><span><i class="l-libre-pub"></i>Disponible · personas</span><span><i class="l-ocupada"></i>Ocupada</span></div>
+              <div class="plano-caja">${plano({ publico: true, noche: V.noche, sel: V.sel, suc: V.suc })}</div>
+              <p class="tenue chico">¿Son más de 12? Escríbele a tu RP y juntamos mesas.</p>
+            </div>
+            <div id="panel-mesa">${panelMesa()}</div>
+          </div>`;
+      }
+
+      document.addEventListener("click", (e) => {
+        const t = e.target.closest("[data-pub]");
+        if (!t) return;
+        if (t.dataset.pub === "noche") { V.noche = t.dataset.f; V.sel = null; }
+        if (t.dataset.pub === "suc") { V.suc = t.dataset.suc; V.sel = null; }
+        if (t.dataset.pub === "sel-mesa") V.sel = t.dataset.mesa;
+        if (t.dataset.pub === "cerrar") V.sel = null;
+        pintar();
+        if (t.dataset.pub === "sel-mesa" && innerWidth < 900) document.getElementById("panel-mesa").scrollIntoView({ behavior: "smooth" });
+      });
+      document.addEventListener("keydown", (e) => {
+        if ((e.key === "Enter" || e.key === " ") && e.target.matches("g.mesa")) { e.preventDefault(); e.target.dispatchEvent(new MouseEvent("click", { bubbles: true })); }
+      });
+      document.addEventListener("submit", (e) => {
+        if (e.target.id !== "form-pub") return;
+        e.preventDefault();
+        S = cargar() || S; // por si alguien más apartó mientras tanto
+        if (ocupadas(V.noche, undefined, V.suc).has(V.sel)) { alert("Alguien acaba de apartar esa mesa. Escoge otra."); V.sel = null; return pintar(); }
+        const d = Object.fromEntries(new FormData(e.target));
+        const r = altaReserva({ ...d, noche: V.noche, suc: V.suc, mesas: [V.sel], rp: rpLiga ? rpLiga.id : "casa", origen: rpLiga ? "liga" : "web", ocasion: "Normal", forzada: "cliente" });
+        guardar();
+        location.href = "mi-mesa.html?c=" + r.codigo;
+      });
+      // Si el personal o alguien más aparta una mesa, el mapa se actualiza solo.
+      window.addEventListener("storage", (e) => { if (e.key === LLAVE && e.newValue) { recibirDatos(e.newValue); if (V.sel && ocupadas(V.noche, undefined, V.suc).has(V.sel)) V.sel = null; pintar(); } });
+      pintar();
+    </script>
+  </body>
+</html>

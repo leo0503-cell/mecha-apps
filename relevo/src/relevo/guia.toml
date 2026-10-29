@@ -1,0 +1,52 @@
+# Guía de entrevista de Relevo.
+# Cada pregunta recibe el identificador <categoria>-<número de dos dígitos>,
+# que es el que se usa en las transcripciones: [P:decisiones-01].
+
+[[categoria]]
+id = "decisiones"
+nombre = "Decisiones frecuentes"
+preguntas = [
+    "¿Qué decisión tomas cada semana que nadie más sabe tomar?",
+    "Cuando algo se descompone y no hay refacción, ¿qué haces primero?",
+    "¿Cómo decides a quién le das permiso cuando todos lo piden a la vez?",
+    "¿Cuándo pides una segunda opinión o una segunda cotización?",
+]
+
+[[categoria]]
+id = "senales"
+nombre = "Señales de que algo va mal"
+preguntas = [
+    "¿Qué ruido, olor o comportamiento te avisa antes de una falla?",
+    "¿Qué señal te hace detener todo de inmediato?",
+]
+
+[[categoria]]
+id = "excepciones"
+nombre = "Excepciones"
+preguntas = [
+    "¿Cuándo rompes la regla de siempre y por qué?",
+    "¿Qué haces cuando el proveedor de siempre no llega?",
+]
+
+[[categoria]]
+id = "contactos"
+nombre = "A quién llamar"
+preguntas = [
+    "¿A quién llamas cuando nadie más contesta, y cómo conviene contactarlo?",
+]
+
+[[categoria]]
+id = "limites"
+nombre = "Límites"
+preguntas = [
+    "¿Qué nunca debe hacer quien te sustituya?",
+    "¿Qué cambio nunca se hace sin avisar a otra área?",
+]
+
+[[categoria]]
+id = "trucos"
+nombre = "Trucos no escritos"
+preguntas = [
+    "¿Dónde encuentras la información cuando el registro oficial está incompleto?",
+    "¿Qué atajo usas que no está en ningún manual?",
+]

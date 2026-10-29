@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Traba · Bandeja de excepciones</title>
+    <style>
+      :root {
+        --fondo: #f1efe9;
+        --tinta: #16161a;
+        --rojo: #c0241a;
+        --borde: #dedbd4;
+        --gris: #676a70;
+        --relleno: #e03127;
+        --superficie: #ffffff;
+        --hover: #faf9f6;
+        --activo: #f8f5ef;
+        --suave: #f1efe9;
+        --suave-tinta: #36373a;
+        --campo-borde: #aaa8a3;
+        --linea: #eeece6;
+        --fuente-fondo: #f7f6f2;
+        --alerta-fondo: #fcedea;
+        --listo-fondo: #eaf4ec;
+        --listo-tinta: #235638;
+        --cabecera: #16161a;
+        --cabecera-tinta: #f1efe9;
+        --cabecera-gris: #c9c8c6;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --fondo: #121214;
+          --tinta: #ecebe7;
+          --rojo: #ff6b5e;
+          --borde: #2c2c31;
+          --gris: #a3a4a9;
+          --relleno: #e03127;
+          --superficie: #1b1b1f;
+          --hover: #222227;
+          --activo: #26201f;
+          --suave: #24242a;
+          --suave-tinta: #d6d5d1;
+          --campo-borde: #4a4a52;
+          --linea: #2a2a2f;
+          --fuente-fondo: #202025;
+          --alerta-fondo: #3a1d1a;
+          --listo-fondo: #16301f;
+          --listo-tinta: #8fd3a5;
+          --cabecera: #0a0a0b;
+          --cabecera-tinta: #f1efe9;
+          --cabecera-gris: #a9a8a6;
+          color-scheme: dark;
+        }
+      }
+      :root[data-theme="dark"] {
+        --fondo: #121214;
+        --tinta: #ecebe7;
+        --rojo: #ff6b5e;
+        --borde: #2c2c31;
+        --gris: #a3a4a9;
+        --relleno: #e03127;
+        --superficie: #1b1b1f;
+        --hover: #222227;
+        --activo: #26201f;
+        --suave: #24242a;
+        --suave-tinta: #d6d5d1;
+        --campo-borde: #4a4a52;
+        --linea: #2a2a2f;
+        --fuente-fondo: #202025;
+        --alerta-fondo: #3a1d1a;
+        --listo-fondo: #16301f;
+        --listo-tinta: #8fd3a5;
+        --cabecera: #0a0a0b;
+        --cabecera-tinta: #f1efe9;
+        --cabecera-gris: #a9a8a6;
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--fondo);
+        color: var(--tinta);
+        font:
+          15px/1.5 system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid var(--rojo);
+        outline-offset: 3px;
+      }
+      header {
+        background: var(--cabecera);
+        color: var(--cabecera-tinta);
+        padding: 26px max(24px, calc((100vw - 1480px) / 2));
+      }
+      header p {
+        margin: 4px 0 0;
+        color: var(--cabecera-gris);
+      }
+      .marca {
+        font-size: 29px;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+      .marca span {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0;
+        margin-left: 12px;
+        color: var(--cabecera-gris);
+      }
+      .brasa {
+        display: inline-block;
+        width: 10px;
+        height: 25px;
+        background: var(--relleno);
+        margin-right: 10px;
+        border-radius: 3px;
+      }
+      main {
+        max-width: 1528px;
+        margin: auto;
+        padding: 24px;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 19px;
+        margin: 0 0 12px;
+      }
+      h3 {
+        font-size: 15px;
+        margin: 22px 0 8px;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      .muted {
+        color: var(--gris);
+      }
+      .aviso {
+        border-left: 4px solid var(--relleno);
+        padding: 12px 16px;
+        background: var(--superficie);
+        margin: 18px 0;
+      }
+      .numeros {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+      .numero {
+        padding: 16px 20px;
+        border: 1px solid var(--borde);
+        border-radius: 10px;
+        background: var(--superficie);
+        min-width: 190px;
+      }
+      .numero strong {
+        display: block;
+        font-size: 25px;
+        letter-spacing: -0.6px;
+      }
+      .numero span {
+        color: var(--gris);
+        font-size: 13px;
+      }
+      .filtros {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: 12px;
+        margin: 22px 0;
+      }
+      label {
+        font-size: 12px;
+        font-weight: 650;
+      }
+      input,
+      select {
+        display: block;
+        width: 100%;
+        background: var(--superficie);
+        border: 1px solid var(--campo-borde);
+        border-radius: 6px;
+        padding: 10px;
+        margin-top: 5px;
+        color: var(--tinta);
+      }
+      .espacio {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: baseline;
+        margin: 20px 0 10px;
+      }
+      .espacio p {
+        font-size: 13px;
+      }
+      .contenido {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 20px;
+        align-items: start;
+      }
+      .bandeja,
+      .detalle {
+        background: var(--superficie);
+        border: 1px solid var(--borde);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .lista {
+        max-height: 76vh;
+        overflow: auto;
+      }
+      .factura {
+        border: 0;
+        border-bottom: 1px solid var(--borde);
+        background: var(--superficie);
+        text-align: left;
+        width: 100%;
+        padding: 16px 18px;
+        display: block;
+        color: var(--tinta);
+      }
+      .factura:hover {
+        background: var(--hover);
+      }
+      .factura[aria-pressed="true"] {
+        box-shadow: inset 4px 0 var(--relleno);
+        background: var(--activo);
+      }
+      .fila {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: baseline;
+      }
+      .folio {
+        font-weight: 750;
+      }
+      .cliente {
+        font-size: 13px;
+        color: var(--gris);
+        margin: 2px 0 8px;
+      }
+      .etiqueta {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        background: var(--suave);
+        color: var(--suave-tinta);
+        letter-spacing: 0.1px;
+      }
+      .alerta {
+        background: var(--alerta-fondo);
+        color: var(--rojo);
+      }
+      .listo {
+        background: var(--listo-fondo);
+        color: var(--listo-tinta);
+      }
+      .motivo {
+        margin: 8px 0 2px;
+        font-size: 14px;
+        font-weight: 650;
+      }
+      .responsable {
+        font-size: 12px;
+        color: var(--gris);
+      }
+      .detalle {
+        padding: 22px;
+        position: sticky;
+        top: 16px;
+        max-height: 90vh;
+        overflow: auto;
+      }
+      .detalle:focus {
+        outline: none;
+      }
+      .vacio {
+        padding: 30px;
+        color: var(--gris);
+      }
+      dl {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 20px 0;
+      }
+      dt {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--gris);
+      }
+      dd {
+        margin: 3px 0;
+        font-size: 14px;
+        overflow-wrap: anywhere;
+      }
+      .uuid {
+        font:
+          12px/1.6 ui-monospace,
+          monospace;
+        overflow-wrap: anywhere;
+      }
+      .accion {
+        padding: 14px;
+        background: var(--suave);
+        border-radius: 6px;
+      }
+      .hecho {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--linea);
+      }
+      .hecho p {
+        font-size: 14px;
+        margin: 0 0 4px;
+      }
+      .fuente {
+        display: block;
+        font-size: 11px;
+        color: var(--gris);
+        overflow-wrap: anywhere;
+      }
+      details {
+        margin: 9px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--rojo);
+      }
+      .fuente-completa {
+        padding: 8px 10px;
+        background: var(--fuente-fondo);
+        margin: 5px 0;
+        border-radius: 4px;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+      }
+      .fuente-completa p {
+        margin: 2px 0;
+      }
+      .faltantes {
+        padding-left: 20px;
+        font-size: 14px;
+      }
+      footer {
+        font-size: 12px;
+        color: var(--gris);
+        padding: 24px 0;
+      }
+      .cerrar {
+        display: none;
+        border: 1px solid var(--borde);
+        border-radius: 5px;
+        padding: 6px 10px;
+        background: var(--superficie);
+        color: var(--tinta);
+      }
+      .advertencias {
+        font-size: 13px;
+      }
+      noscript {
+        display: block;
+        padding: 20px;
+        color: var(--rojo);
+      }
+      @media (max-width: 1000px) {
+        .contenido {
+          grid-template-columns: 1fr 1fr;
+        }
+        .filtros {
+          grid-template-columns: 1fr 1fr;
+        }
+        .fila {
+          flex-wrap: wrap;
+        }
+      }
+      @media (max-width: 700px) {
+        header {
+          padding: 20px;
+        }
+        main {
+          padding: 16px;
+        }
+        .marca {
+          font-size: 26px;
+        }
+        h1 {
+          font-size: 22px;
+        }
+        .numeros {
+          gap: 8px;
+        }
+        .numero {
+          min-width: 0;
+          flex: 1;
+          padding: 12px;
+        }
+        .numero strong {
+          font-size: 20px;
+        }
+        .numero span {
+          font-size: 11px;
+        }
+        .filtros {
+          gap: 8px;
+        }
+        .contenido {
+          display: block;
+        }
+        .detalle {
+          position: static;
+          max-height: none;
+          margin-top: 16px;
+        }
+        .lista {
+          max-height: none;
+        }
+        .cerrar {
+          display: inline-block;
+          margin-bottom: 18px;
+        }
+        .fila {
+          flex-wrap: nowrap;
+        }
+        .espacio {
+          display: block;
+        }
+        .aviso {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="marca">
+        <i class="brasa" aria-hidden="true"></i>Traba<span>por Mecha</span>
+      </div>
+      <p>
+        Cada factura detenida, con su motivo, evidencia y siguiente responsable.
+      </p>
+    </header>
+    <main>
+      <h1>Bandeja de excepciones</h1>
+      <p class="muted">
+        Del bloqueo a la siguiente acción, con fuentes a la vista.
+      </p>
+      <div id="aviso" class="aviso"></div>
+      <div id="numeros" class="numeros" aria-live="polite"></div>
+      <div class="filtros">
+        <label
+          >Buscar factura o cliente<input
+            id="buscar"
+            type="search"
+            placeholder="Folio, cliente, UUID u orden de compra"
+        /></label>
+        <label
+          >Estado<select id="estado">
+            <option value="">Todos los estados</option>
+          </select></label
+        >
+        <label
+          >Motivo<select id="motivo">
+            <option value="">Todos los motivos</option>
+          </select></label
+        >
+        <label
+          >Responsable<select id="responsable">
+            <option value="">Todos los responsables</option>
+          </select></label
+        >
+      </div>
+      <div class="espacio">
+        <h2>Facturas por revisar</h2>
+        <p id="conteo" class="muted" aria-live="polite"></p>
+      </div>
+      <div class="contenido">
+        <section class="bandeja" aria-label="Facturas">
+          <div id="lista" class="lista"></div>
+        </section>
+        <section
+          id="detalle"
+          class="detalle"
+          tabindex="-1"
+          aria-label="Detalle del expediente"
+        >
+          <p class="muted">
+            Selecciona una factura para consultar su expediente y las fuentes.
+          </p>
+        </section>
+      </div>
+      <div id="advertencias" class="advertencias"></div>
+      <footer>
+        Uso interno · Los totales representan importes facturados, no saldo
+        recuperable ni cobros atribuibles a Traba. Se conservan por moneda, sin
+        conversión. El XML local no valida vigencia fiscal; la ausencia de
+        complemento no demuestra impago. Los envíos y la validación humana
+        ocurren fuera de esta bandeja.
+      </footer>
+      <noscript
+        >Activa JavaScript para usar la bandeja. Los expedientes también están
+        disponibles en expedientes.json.</noscript
+      >
+    </main>
+    <script id="datos" type="application/json">
+      __DATOS_TRABA__
+    </script>
+    <script>
+      "use strict";
+      const datos = JSON.parse(document.getElementById("datos").textContent);
+      const expedientes = datos.expedientes;
+      const $ = (id) => document.getElementById(id);
+      const escape = (valor) =>
+        String(valor ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const centavos = (valor) => {
+        const [a, b = ""] = String(valor).split(".");
+        return BigInt(a) * 100n + BigInt((b + "00").slice(0, 2));
+      };
+      const importe = (valor) => {
+        const n = typeof valor === "bigint" ? valor : centavos(valor);
+        return (
+          (n / 100n).toLocaleString("es-MX") +
+          "." +
+          String(n % 100n).padStart(2, "0")
+        );
+      };
+      const etiqueta = (estado) =>
+        `<span class="etiqueta ${["aceptado", "pago confirmado"].includes(estado) ? "listo" : ["vínculo por confirmar", "evidencia incompleta"].includes(estado) ? "alerta" : ""}">${escape(estado)}</span>`;
+      let seleccionado = null;
+      $("aviso").textContent = datos.aviso;
+      for (const campo of ["estado", "motivo", "responsable"]) {
+        const valores = [
+          ...new Set(
+            expedientes.flatMap((e) =>
+              campo === "motivo"
+                ? e.motivos.length
+                  ? e.motivos
+                  : [e.motivo]
+                : [e[campo]],
+            ),
+          ),
+        ].sort((a, b) => a.localeCompare(b, "es-MX"));
+        for (const valor of valores) {
+          const opcion = document.createElement("option");
+          opcion.value = valor;
+          opcion.textContent = valor;
+          $(campo).appendChild(opcion);
+        }
+        $(campo).addEventListener("change", renderizar);
+      }
+      $("buscar").addEventListener("input", renderizar);
+      function fuentes(lista) {
+        return `<details><summary>Ver ${lista.length} campos de origen</summary>${lista.map((f) => `<div class="fuente-completa"><strong>${escape(f.archivo)}</strong><span class="fuente">${escape(f.campo)}${f.linea ? ` · línea ${f.linea}` : ""}</span><p>${escape(f.valor)}</p></div>`).join("")}</details>`;
+      }
+      function seccion(titulo, elementos) {
+        return `<h3>${titulo}</h3>${elementos.length ? elementos.map((h) => `<div class="hecho"><p>${escape(h.descripcion)}</p>${fuentes(h.fuentes)}</div>`).join("") : '<p class="muted">Sin registros.</p>'}`;
+      }
+      function detallar(id, enfocar = true) {
+        seleccionado = id;
+        const e = expedientes.find((e) => e.id === id);
+        if (!e) return;
+        $("detalle").innerHTML =
+          `<button class="cerrar" id="volver">Volver a la bandeja ↑</button><div class="fila"><h2>Factura ${escape(e.folio)}</h2>${etiqueta(e.estado)}</div><p class="muted">${escape(e.cliente)}</p><p class="uuid">UUID · ${escape(e.uuid)}</p><dl><div><dt>Importe facturado</dt><dd>${importe(e.monto)} ${escape(e.moneda)}</dd></div><div><dt>Vencimiento documentado</dt><dd>${escape(e.vencimiento)}</dd></div><div><dt>Orden de compra</dt><dd>${escape(e.pedido)}</dd></div><div><dt>Saldo de cartera sin recalcular</dt><dd>${escape(e.saldo_cartera)} ${escape(e.moneda)}</dd></div><div><dt>RFC</dt><dd>${escape(e.rfc)}</dd></div><div><dt>Estado fiscal conocido</dt><dd>${escape(e.estado_fiscal)}</dd></div></dl><h3>Motivo del bloqueo</h3><p>${escape(e.motivos.join(" · ") || "Sin bloqueo administrativo documentado")}</p><div class="accion"><strong>Siguiente responsable · ${escape(e.responsable)}</strong><p>${escape(e.siguiente_accion)}</p></div>${seccion("Hechos confirmados en las fuentes", e.hechos_confirmados)}${seccion("Inferencias y sugerencias por validar", e.inferencias)}<h3>Datos faltantes</h3><ul class="faltantes">${e.datos_faltantes.map((d) => `<li>${escape(d)}</li>`).join("") || "<li>Sin faltantes registrados.</li>"}</ul><h3>Vínculos y nivel de certeza</h3>${e.vinculos.map((v) => `<div class="hecho"><p><strong>${escape(v.tipo)} · ${escape(v.nivel)}</strong></p><p>${escape(v.criterio)}</p><span class="fuente">${escape(v.destino)}</span>${fuentes(v.fuentes)}</div>`).join("") || '<p class="muted">Sin vínculos identificados.</p>'}<h3>Campos de la factura</h3>${fuentes(e.fuentes)}`;
+        $("volver").addEventListener("click", () => {
+          $("lista").scrollIntoView({ behavior: "smooth", block: "start" });
+          $("lista").querySelector("button")?.focus({ preventScroll: true });
+        });
+        for (const b of $("lista").querySelectorAll("button"))
+          b.setAttribute("aria-pressed", String(b.dataset.id === id));
+        if (enfocar) {
+          $("detalle").focus({ preventScroll: true });
+          if (window.innerWidth <= 700)
+            $("detalle").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+      function renderizar() {
+        const q = $("buscar").value.toLocaleLowerCase("es-MX");
+        const filtrados = expedientes.filter(
+          (e) =>
+            (!$("estado").value || e.estado === $("estado").value) &&
+            (!$("motivo").value ||
+              e.motivos.includes($("motivo").value) ||
+              e.motivo === $("motivo").value) &&
+            (!$("responsable").value ||
+              e.responsable === $("responsable").value) &&
+            [e.folio, e.cliente, e.uuid, e.pedido].some((v) =>
+              v.toLocaleLowerCase("es-MX").includes(q),
+            ),
+        );
+        $("conteo").textContent =
+          `${filtrados.length} de ${expedientes.length} facturas · resultados del filtro`;
+        const totales = new Map();
+        for (const e of filtrados)
+          totales.set(
+            e.moneda,
+            (totales.get(e.moneda) || 0n) + centavos(e.monto),
+          );
+        $("numeros").innerHTML =
+          `<div class="numero"><strong>${filtrados.length}</strong><span>Expedientes visibles</span></div>` +
+          [...totales]
+            .sort()
+            .map(
+              ([m, n]) =>
+                `<div class="numero"><strong>${importe(n)} ${escape(m)}</strong><span>Importe facturado · filtro actual</span></div>`,
+            )
+            .join("");
+        $("lista").innerHTML =
+          filtrados
+            .map(
+              (e) =>
+                `<button class="factura" data-id="${escape(e.id)}" aria-pressed="${e.id === seleccionado}"><div class="fila"><span class="folio">${escape(e.folio)}</span><strong>${importe(e.monto)} ${escape(e.moneda)}</strong></div><div class="cliente">${escape(e.cliente)}</div>${etiqueta(e.estado)}<div class="motivo">${escape(e.motivos[0] || "Sin bloqueo documentado")}</div><div class="responsable">${escape(e.responsable)} · vence ${escape(e.vencimiento)}</div></button>`,
+            )
+            .join("") ||
+          '<div class="vacio">No hay facturas que coincidan con estos filtros.</div>';
+        for (const b of $("lista").querySelectorAll("button"))
+          b.addEventListener("click", () => detallar(b.dataset.id));
+        if (seleccionado && !filtrados.some((e) => e.id === seleccionado)) {
+          seleccionado = null;
+          $("detalle").innerHTML =
+            '<p class="muted">Selecciona una factura de los resultados actuales.</p>';
+        }
+      }
+      if (datos.avisos.length)
+        $("advertencias").innerHTML =
+          `<h3>Fuentes que requieren revisión</h3><ul>${datos.avisos.map((a) => `<li>${escape(a)}</li>`).join("")}</ul>`;
+      renderizar();
+    </script>
+  </body>
+</html>

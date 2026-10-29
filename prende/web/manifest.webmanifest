@@ -1,0 +1,18 @@
+{
+  "id": "./",
+  "name": "Prende de Mecha",
+  "short_name": "Prende",
+  "description": "Usa la IA en tu negocio desde hoy.",
+  "lang": "es-MX",
+  "start_url": "./#/inicio",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F1EFE9",
+  "theme_color": "#F1EFE9",
+  "icons": [
+    { "src": "assets/img/icono-512-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icono-512-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/icono-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/img/icono-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

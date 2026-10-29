@@ -1,0 +1,41 @@
+/* Generado por build.py. No editar a mano: cambia src/brand.py. */
+:root {
+  --polvora: #16161A;
+  --ceniza: #F1EFE9;
+  --mecha: #E03127;
+  --mecha-texto: #C0241A;
+  --mecha-clara: #FF6152;
+  --humo: #676A70;
+  --humo-claro: #9A9CA2;
+  --azufre: #E8A317;
+  --azufre-texto: #8A6100;
+  --azufre-claro: #F3BE4D;
+
+  --bg: #F1EFE9;
+  --fg: #16161A;
+  --fg2: #676A70;
+  --acc: #E03127;
+  --acc-text: #C0241A;
+  --acc2: #E8A317;
+  --acc2-text: #8A6100;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --bg: #16161A;
+  --fg: #F1EFE9;
+  --fg2: #9A9CA2;
+  --acc: #FF6152;
+  --acc-text: #FF6152;
+  --acc2: #F3BE4D;
+  --acc2-text: #F3BE4D;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16161A;
+  --fg: #F1EFE9;
+  --fg2: #9A9CA2;
+  --acc: #FF6152;
+  --acc-text: #FF6152;
+  --acc2: #F3BE4D;
+  --acc2-text: #F3BE4D;
+}

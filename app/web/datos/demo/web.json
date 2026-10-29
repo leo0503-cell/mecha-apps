@@ -1,0 +1,35 @@
+{
+  "titulo": "mecha.mx",
+  "url": "<https://mecha.mx>",
+  "estado": "en construcción",
+  "actualizado": "2026-10-01",
+  "captura": "web/captura.webp",
+  "visitas_mes": null,
+  "secciones": [
+    "Portada con el robot y la app en un celular",
+    "Síntomas: tardas en contestar, cotizas a mano, agendas por mensaje",
+    "Qué hacemos: automatización y marketing",
+    "Contenido real: reel y carruseles",
+    "La app y el radar diario",
+    "Tres paquetes con precio",
+    "Cómo trabajamos y preguntas frecuentes"
+  ],
+  "pendientes": [
+    {
+      "texto": "Verificar y comprar el dominio mecha.mx",
+      "hecho": false
+    },
+    {
+      "texto": "Correo e Instagram oficiales",
+      "hecho": false
+    },
+    {
+      "texto": "Plazo mínimo de contratación",
+      "hecho": false
+    },
+    {
+      "texto": "Elegir hosting y publicar",
+      "hecho": false
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es-MX" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#F1EFE9" />
+    <meta
+      name="description"
+      content="Marketing y automatización para tu negocio. Describe tu problema, acuerda una propuesta con Mecha y recibe tu solución con implementación y seguimiento."
+    />
+    <title>Mecha · Tu negocio, en marcha</title>
+    <link rel="stylesheet" href="/assets/tokens.css" />
+    <link rel="stylesheet" href="/style.css?v=5" />
+    <script type="module" src="/build/app.js?v=5"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="/" class="brand" aria-label="Mecha, inicio"
+        ><img src="/assets/logo.webp?v=5" alt="Mecha"
+      /></a>
+      <div id="navigation"></div>
+    </header>
+    <main id="app">
+      <div class="boot" role="status">Preparando tu espacio…</div>
+    </main>
+    <footer class="page-footer">
+      <span>Una idea puede cambiar tu día.</span><span>Hecho por Mecha.</span>
+    </footer>
+    <aside
+      id="drawer"
+      class="drawer"
+      hidden
+      aria-label="Historial de solicitudes"
+    ></aside>
+    <div id="drawer-shade" class="shade" hidden></div>
+    <dialog id="profile-dialog" class="profile-dialog">
+      <div id="profile-content"></div>
+    </dialog>
+    <dialog id="preview-dialog" class="preview-dialog">
+      <div class="preview-head">
+        <span>Vista previa de tu página</span
+        ><button
+          type="button"
+          id="close-preview"
+          class="icon-button"
+          aria-label="Cerrar vista previa"
+        >
+          ×
+        </button>
+      </div>
+      <iframe
+        title="Página creada para tu negocio"
+        sandbox=""
+        referrerpolicy="no-referrer"
+      ></iframe>
+      <p>Archivo listo para revisar y descargar. Todavía no está publicado.</p>
+    </dialog>
+    <dialog
+      id="catalog-dialog"
+      class="catalog-dialog"
+      aria-labelledby="catalog-title"
+    >
+      <div class="catalog-header">
+        <div>
+          <span class="step-label">SERVICIOS MECHA</span>
+          <h2 id="catalog-title">¿Qué quieres resolver?</h2>
+        </div>
+        <button
+          type="button"
+          id="close-catalog"
+          class="icon-button"
+          aria-label="Cerrar catálogo"
+        >
+          ×
+        </button>
+      </div>
+      <p class="muted">
+        Elige una idea o escribe la tuya. Mecha revisa el alcance y prepara tu
+        entrega.
+      </p>
+      <div class="catalog-filters">
+        <label class="sr-only" for="catalog-search">Buscar un servicio</label
+        ><input
+          id="catalog-search"
+          type="search"
+          placeholder="Excel, prospectos, video, WhatsApp…"
+        /><label class="sr-only" for="catalog-category"
+          >Categoría de servicio</label
+        ><select id="catalog-category"></select>
+      </div>
+      <p id="catalog-count" class="small muted" aria-live="polite"></p>
+      <div id="catalog-results"></div>
+    </dialog>
+    <div id="toast" class="toast" hidden role="status"></div>
+  </body>
+</html>

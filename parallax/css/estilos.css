@@ -1,0 +1,345 @@
+@font-face {
+  font-family: Archivo;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fuentes/Archivo-VF.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url("../assets/fuentes/DMSans-VF.woff2") format("woff2");
+}
+
+/* Paleta de Mecha (misma que ~/mecha/sitio/css/tokens.css) */
+:root {
+  --polvora: #16161a;
+  --polvora-2: #1e1e23;
+  --ceniza: #f1efe9;
+  --mecha: #e03127;
+  --mecha-clara: #ff6152;
+  --humo-claro: #9a9ca2;
+  --azufre: #e8a317;
+  --gutter: clamp(16px, 4vw, 56px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--polvora);
+  color: var(--ceniza);
+  font-family: "DM Sans", sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2 {
+  font-family: Archivo, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+}
+
+/* ---------- Barra ---------- */
+.barra {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px var(--gutter);
+  background: linear-gradient(var(--polvora) 30%, transparent);
+}
+/* El webp trae aire alrededor: se agranda y se recorta con margen negativo. */
+.barra__logo img {
+  height: 64px;
+  width: auto;
+  margin: -14px 0 -14px -12px;
+}
+
+.boton {
+  display: inline-block;
+  padding: 16px 28px;
+  border-radius: 999px;
+  background: var(--mecha);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.boton:hover {
+  background: var(--mecha-clara);
+  color: var(--polvora);
+  transform: translateY(-2px);
+}
+.boton--chico {
+  padding: 10px 18px;
+  font-size: 15px;
+}
+
+.etiqueta {
+  margin: 0 0 20px;
+  color: var(--azufre);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Portada ---------- */
+.portada {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 24px;
+  padding: 110px var(--gutter) 80px;
+  overflow: hidden;
+}
+.portada__brillo {
+  position: absolute;
+  right: -10vw;
+  top: 10%;
+  width: 70vw;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgb(224 49 39 / 0.35), transparent 60%);
+  pointer-events: none;
+}
+.portada__texto {
+  position: relative;
+  z-index: 1;
+}
+.portada__titulo {
+  font-size: clamp(44px, 7.4vw, 112px);
+}
+.linea {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.linea > span {
+  display: inline-block;
+}
+.acento {
+  color: var(--mecha);
+}
+.portada__bajada {
+  max-width: 34ch;
+  margin: 28px 0 0;
+  color: var(--humo-claro);
+  font-size: clamp(17px, 1.4vw, 20px);
+}
+.portada__robot {
+  position: relative;
+  width: min(100%, 560px);
+  height: auto;
+  justify-self: center;
+  filter: drop-shadow(0 30px 60px rgb(224 49 39 / 0.25));
+}
+.portada__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  color: var(--humo-claro);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.portada__scroll i {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(var(--mecha), transparent);
+  animation: goteo 1.8s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes goteo {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+/* ---------- Escenas ---------- */
+.escena {
+  position: relative;
+  min-height: 130vh;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: clamp(48px, 8vh, 96px);
+  padding: 15vh var(--gutter);
+}
+.escena + .escena {
+  border-top: 1px solid rgb(241 239 233 / 0.06);
+}
+
+/* El marco NO recorta: la imagen crece hasta 1.2 y se sale del ancho base.
+   Por eso el ancho base es ~80% del máximo que queremos ver. */
+.escena__marco {
+  margin: 0;
+  width: min(62vw, 760px);
+}
+/* Capa 1: parallax vertical (solo y). */
+.escena__capa {
+  will-change: transform;
+}
+/* Capa 2: escala + opacidad. Van en elementos distintos para que
+   los dos tweens no se peleen el mismo transform. */
+.escena__img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 20px;
+  background: var(--polvora-2);
+  box-shadow:
+    0 40px 80px -30px rgb(0 0 0 / 0.7),
+    0 0 0 1px rgb(241 239 233 / 0.06);
+  will-change: transform, opacity;
+}
+
+.escena__texto {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 880px);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 28px;
+  align-items: baseline;
+}
+.escena__num {
+  grid-row: span 2;
+  font-family: Archivo, sans-serif;
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 800;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--mecha);
+}
+.escena__texto h2 {
+  font-size: clamp(30px, 4vw, 54px);
+}
+.escena__texto p {
+  margin: 12px 0 0;
+  max-width: 46ch;
+  color: var(--humo-claro);
+}
+.escena--der .escena__texto {
+  text-align: right;
+  grid-template-columns: 1fr auto;
+}
+.escena--der .escena__num {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+.escena--der .escena__texto p {
+  justify-self: end;
+}
+
+/* ---------- Cierre ---------- */
+.cierre {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  padding: 20vh var(--gutter);
+  text-align: center;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgb(224 49 39 / 0.28),
+    transparent 65%
+  );
+}
+.cierre__titulo {
+  font-size: clamp(48px, 9vw, 140px);
+}
+.cierre p {
+  max-width: 40ch;
+  margin: 0 0 12px;
+  color: var(--humo-claro);
+}
+
+.pie {
+  display: flex;
+  justify-content: space-between;
+  padding: 28px var(--gutter);
+  color: var(--humo-claro);
+  font-size: 14px;
+  border-top: 1px solid rgb(241 239 233 / 0.08);
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 760px) {
+  .portada {
+    grid-template-columns: 1fr;
+    padding-top: 96px;
+  }
+  .portada__robot {
+    width: 70%;
+    grid-row: 1;
+  }
+  .escena {
+    min-height: 110vh;
+  }
+  .escena__marco {
+    width: 78vw;
+  }
+  .escena__texto,
+  .escena--der .escena__texto {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .escena--der .escena__num {
+    grid-column: 1;
+  }
+  .escena__num {
+    grid-row: auto;
+    margin-bottom: 12px;
+  }
+  .escena--der .escena__texto p {
+    justify-self: start;
+  }
+}
+
+/* Sin movimiento: se ve todo en su estado final y sin animaciones. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .portada__scroll i {
+    animation: none;
+  }
+}

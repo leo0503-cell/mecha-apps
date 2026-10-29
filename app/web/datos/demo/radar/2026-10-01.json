@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cliente": "demo",
+  "fecha": "2026-10-01",
+  "numero": 1,
+  "generado": "2026-10-01T12:40:00-06:00",
+  "portada": {
+    "titulo": "Desde hoy, contestar por WhatsApp Business API ya no es gratis",
+    "bajada": "Meta empezó a cobrar los mensajes de servicio y las plantillas de utilidad que se mandan dentro de la ventana de 24 horas. Antes no costaban.",
+    "por_que_importa": "El costo variable de cada asistente que montes depende de esto. Hay que recalcular la mensualidad de los paquetes con la tarifa nueva antes de mandar la siguiente propuesta.",
+    "fuentes": [
+      {
+        "titulo": "Meta — Upcoming pricing updates for service and utility messages",
+        "url": "https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing/non-template-messages"
+      },
+      {
+        "titulo": "YCloud — WhatsApp API pricing update effective October 1, 2026",
+        "url": "https://www.ycloud.com/blog/whatsapp-api-message-pricing-update-effective-october-1-2026"
+      }
+    ]
+  },
+  "competencia": [
+    {
+      "competidor": "Business AI de Meta",
+      "titulo": "El asistente gratis de WhatsApp Business sigue siendo tu competidor más grande",
+      "detalle": "México fue el primer país con asistentes de IA dentro de la app de WhatsApp Business. Contesta preguntas frecuentes y recomienda productos del catálogo; para activarlo el negocio necesita tener al menos un producto cargado.",
+      "que_hacer": "En cada diagnóstico, enséñale al dueño qué hace el asistente gratis y qué no hace con su operación: cotizar con su lista de precios, agendar y mandarle reporte. Si con el de Meta le basta, dilo.",
+      "fuentes": [
+        {
+          "titulo": "Expansión — México, primer país con agentes de IA en WhatsApp Business",
+          "url": "https://expansion.mx/tecnologia/2025/10/16/mexico-primer-pais-agentes-de-ia-whatsapp-business"
+        }
+      ]
+    },
+    {
+      "competidor": "Lovbot",
+      "titulo": "Vende agentes de WhatsApp a negocios mexicanos sin publicar precio",
+      "detalle": "Ofrece atención 24/7, calificación de prospectos y agenda de citas, con CRM incluido. Para saber el costo hay que agendar una demo; apunta a bienes raíces, automotriz, clínicas, legal, ecommerce y hospitalidad.",
+      "que_hacer": "Tu precio a la vista es la diferencia más fácil de explicar. Cuando publiques la página de precios, que se note que no hay que agendar nada para saber cuánto cuesta.",
+      "fuentes": [
+        {
+          "titulo": "Lovbot — Chatbot de WhatsApp para México",
+          "url": "https://www.lovbot.ai/chatbot-whatsapp-mexico/"
+        }
+      ]
+    },
+    {
+      "competidor": "Leadsales",
+      "titulo": "Ya publicó su guía del cambio de precios de WhatsApp",
+      "detalle": "Es plataforma de WhatsApp Business API con CRM y agentes de IA. Sacó un artículo con calculadora del costo de Meta para captar a quien busca cuánto le va a costar el cambio.",
+      "que_hacer": "Esta semana publica tu versión corta y sin tecnicismos: qué le cambia a un negocio chico que contesta por WhatsApp. Ver la idea de hoy.",
+      "fuentes": [
+        {
+          "titulo": "Leadsales — Precios de WhatsApp Business API en 2026",
+          "url": "https://leadsales.io/blog/whatsapp-business-api-cuanto-cuesta/"
+        },
+        {
+          "titulo": "Leadsales — Cambios de precios de WhatsApp Business Platform",
+          "url": "https://leadsales.io/blog/cambios-precios-whatsapp-business-platform/"
+        }
+      ]
+    }
+  ],
+  "mercado": [
+    {
+      "titulo": "Casi la mitad de las PyMEs mexicanas ya usa IA, pero la mayoría se quedó en lo básico",
+      "detalle": "Según un informe de Strand Partners para AWS citado por El Universal, la adopción en PyMEs es de 47%, y 63% de las empresas que usan IA sigue en etapa básica. Es exactamente el hueco que vende Mecha: pasar de \"ya uso ChatGPT\" a un proceso que corre solo.",
+      "impacto": "alto",
+      "fuentes": [
+        {
+          "titulo": "El Universal — Uso de IA en empresas mexicanas",
+          "url": "https://www.eluniversal.com.mx/nacion/uso-de-ia-en-empresas-mexicanas-permanece-en-64-dice-especialista-solo-13-usa-sistemas-avanzados/"
+        }
+      ]
+    },
+    {
+      "titulo": "El Buen Fin 2026 dura cinco días: del viernes 13 al martes 17 de noviembre",
+      "detalle": "El registro de negocios es gratuito y está abierto del 8 de septiembre al 12 de noviembre. Los negocios que participan reciben más mensajes esos días, y es el gancho que el plan de arranque marca para noviembre.",
+      "impacto": "alto",
+      "fuentes": [
+        {
+          "titulo": "ADN40 — Buen Fin 2026: fechas y duración",
+          "url": "https://www.adn40.mx/mexico/2026-09-01/buen-fin-2026-fechas-duracion-y-como-participar-en-el-sorteo/"
+        }
+      ]
+    },
+    {
+      "titulo": "Meta ya cobra por tokens a su propio agente en la API de WhatsApp",
+      "detalle": "Desde el 1 de agosto, los mensajes del Meta Business Agent en la plataforma de WhatsApp se cobran por uso de tokens. Los anuncios Click-to-WhatsApp mantienen su ventana gratuita de 72 horas.",
+      "impacto": "medio",
+      "fuentes": [
+        {
+          "titulo": "Meta — Upcoming pricing updates for Meta Business Agent, service and utility messages",
+          "url": "https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing/non-template-messages"
+        }
+      ]
+    }
+  ],
+  "fechas": [
+    {
+      "inicio": "2026-10-15",
+      "fin": null,
+      "nombre": "Quincena",
+      "que_preparar": "Buen día para el recordatorio a prospectos que dejaron la plática a medias en septiembre.",
+      "fuentes": []
+    },
+    {
+      "inicio": "2026-11-01",
+      "fin": "2026-11-02",
+      "nombre": "Día de Muertos",
+      "que_preparar": "Pieza de temporada para tus clientes que venden flor, pan, comida o decoración: planéala dos semanas antes.",
+      "fuentes": []
+    },
+    {
+      "inicio": "2026-11-12",
+      "fin": null,
+      "nombre": "Cierra el registro del Buen Fin",
+      "que_preparar": "Último día para que tus clientes se registren como participantes. Avísales con tiempo.",
+      "fuentes": [
+        {
+          "titulo": "ADN40 — Buen Fin 2026",
+          "url": "https://www.adn40.mx/mexico/2026-09-01/buen-fin-2026-fechas-duracion-y-como-participar-en-el-sorteo/"
+        }
+      ]
+    },
+    {
+      "inicio": "2026-11-13",
+      "fin": "2026-11-17",
+      "nombre": "El Buen Fin",
+      "que_preparar": "El contenido y las respuestas del asistente se preparan dos semanas antes. Ese fin de semana los negocios no se dan abasto con los mensajes.",
+      "fuentes": [
+        {
+          "titulo": "ADN40 — Buen Fin 2026",
+          "url": "https://www.adn40.mx/mexico/2026-09-01/buen-fin-2026-fechas-duracion-y-como-participar-en-el-sorteo/"
+        }
+      ]
+    }
+  ],
+  "idea": {
+    "tipo": "post",
+    "titulo": "Carrusel: \"WhatsApp cambió de precio hoy. Esto es lo que le cambia a tu negocio\"",
+    "detalle": "Aprovecha que es noticia de hoy. Explícalo para un dueño de negocio, no para un programador: qué cambió, a quién le afecta y a quién no (la app normal de WhatsApp Business no cambia).",
+    "texto_sugerido": "Desde hoy, WhatsApp cobra distinto a los negocios que contestan con un sistema conectado (la API).\n\n¿Usas la app normal de WhatsApp Business en tu celular? A ti no te cambia nada.\n\n¿Tienes un bot o una plataforma conectada? Revisa tu factura de este mes: las respuestas dentro de las 24 horas ya no son gratis.\n\nSi no sabes cuál de las dos usas, escríbeme y lo revisamos juntos."
+  },
+  "sin_confirmar": [
+    "Varios proveedores (YCloud, Leadsales) dicen que cada número tiene 1,000 mensajes de servicio gratis al mes. En la página de Meta que revisamos no aparece esa cifra: confírmala en la tarjeta de tarifas antes de usarla en una propuesta.",
+    "La tarifa exacta por mensaje para México cambia según la fuente. No la uses en una propuesta hasta verla en la tarjeta de tarifas oficial de Meta."
+  ],
+  "notas_metodo": "Primera edición, armada con búsqueda web el 1 de octubre de 2026. En cuanto se conecte la llave de la API de Claude, el radar de Mecha la genera solo cada mañana. Cada nota trae la liga de donde salió."
+}
